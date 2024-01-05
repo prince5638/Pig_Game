@@ -58,6 +58,21 @@ btnRoll.addEventListener('click', function () {
 
 btnHold.addEventListener('click', function () {
     if (playing) {
+
+        // 1. Add current score to active player's score
+        scores[activePlayer] += currentScore;
+        document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
+        
+        // 2. Check if player's score is >= 100
+        if (scores[activePlayer] >= 20) {
+            // Finish game 
+            playing = false;
+            diceEl.classList.add('hidden');
+            document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+            document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+        } else {
+            // Switch to next player
+        }
         switchPlayer();
     }
 });
